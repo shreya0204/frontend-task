@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from 'react-router-dom'
+import Login from './components/Register/Login';
+import { useState } from 'react';
+import { AuthProvider } from './store/Auth';
+import Register from './components/Register/Register';
+import AllProducts from './components/Products/AllProducts';
 
 function App() {
+
+  const [isLogin, setIsLogin] = useState(1);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Routes>
+        <Route path='/login' element={<Login isLogin={isLogin} setIsLogin={setIsLogin} />}></Route>
+        <Route path='/register' element={<Register />}></Route>
+        <Route path='/products' element={<AllProducts />}></Route>
+      </Routes>
+    </AuthProvider>
   );
 }
 
